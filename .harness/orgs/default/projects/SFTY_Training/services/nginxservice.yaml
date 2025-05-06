@@ -1,0 +1,25 @@
+service:
+  name: nginx-service
+  identifier: nginxservice
+  serviceDefinition:
+    type: Kubernetes
+    spec:
+      manifests:
+        - manifest:
+            identifier: nginxManifest
+            type: K8sManifest
+            spec:
+              store:
+                type: Git
+                spec:
+                  connectorRef: gitCD
+                  gitFetchType: Branch
+                  paths:
+                    - manifests
+                  repoName: harness-cd
+                  branch: main
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
+  gitOpsEnabled: false
+  orgIdentifier: default
+  projectIdentifier: SFTY_Training
